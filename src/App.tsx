@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div className="table_container">
       <Table
-        caption="The table below is sortable by the Name, DOB or Salary Column"
+        caption="The table below is sortable by the Name, DOB or Salary Column with 10 items per page"
         data={tableData1.ctRoot}
         columns={columns}
       />
