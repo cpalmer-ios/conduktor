@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Table from "./components/Table";
+import tableData1 from "./data/random-people-data.json";
 
-function App() {
+const columns = [
+  { label: "Name", accessor: "name", sortable: true },
+  { label: "DOB", accessor: "dob", sortable: true, sortbyOrder: "desc" },
+  { label: "Email", accessor: "email", sortable: false },
+  { label: "Salary", accessor: "salary", sortable: true },
+  { label: "Verified", accessor: "verified", sortable: false },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="table_container">
+      <Table
+        caption="The table below is sortable by the Name, DOB or Salary Column"
+        data={tableData1.ctRoot}
+        columns={columns}
+      />
     </div>
   );
-}
+};
 
 export default App;
