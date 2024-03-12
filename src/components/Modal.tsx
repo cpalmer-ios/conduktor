@@ -1,5 +1,12 @@
+import React from "react"
 
-export const Modal = ({ handleClose, show, children }: any) => {
+interface ModalProps {
+  handleClose: () => void;
+  show: boolean;
+  children: unknown;
+}
+
+export const Modal : React.FC<ModalProps> = ({ handleClose, show, children }: any) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   return (

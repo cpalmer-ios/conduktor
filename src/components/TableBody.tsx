@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
+import { Data } from "../types/data.type";
+import { Column } from "../types/column.type";
 
-const TableBody = ({ tableData, columns }: any) => {
+interface TableBodyProps {
+  // couldn't find a correct data type for this prop
+  tableData: Data[] | ((sortField: any, sortOrder: any) => Data[]) | any;
+  columns: Column[];
+}
+
+const TableBody: React.FC<TableBodyProps> = ({
+  tableData,
+  columns,
+}: TableBodyProps) => {
   const [modal, setModal]: any = useState(false);
-  const [user, setUser]: any = useState({})
+  const [user, setUser]: any = useState({});
 
   const handleClick = (id: string) => {
     const res = tableData.filter((item: any) => item._id === id);
-    setModal( true );
+    setModal(true);
     setUser(res[0]);
   };
 
@@ -45,12 +56,12 @@ const TableBody = ({ tableData, columns }: any) => {
         <p>Postcode: {user?.address?.postcode}</p>
         <p>Telephone: {user.telephone}</p>
         <p>Pets: {user?.pets}</p>
-        <p>Score: {user?.score}</p>	
-        <p>Email: {user?.email}</p>	
-        <p>URL: {user?.url}</p>	
-        <p>Description: {user?.description}</p>	
-        <p>Verified: {user?.verified ? "true" : "false"}</p>	
-        <p>Salary: {user?.salary}</p>	
+        <p>Score: {user?.score}</p>
+        <p>Email: {user?.email}</p>
+        <p>URL: {user?.url}</p>
+        <p>Description: {user?.description}</p>
+        <p>Verified: {user?.verified ? "true" : "false"}</p>
+        <p>Salary: {user?.salary}</p>
       </Modal>
     </>
   );

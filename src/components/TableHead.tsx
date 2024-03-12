@@ -1,9 +1,17 @@
 import { useState } from "react";
-const TableHead = ({ columns, handleSorting }) => {
+import { Column } from "../types/column.type";
+
+interface TableHeadProps {
+  columns: Column[];
+  handleSorting: ((sortField: any, sortOrder: any) => void)
+}
+
+
+const TableHead = ({ columns, handleSorting }: TableHeadProps) => {
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
 
-  const handleSortingChange = (accessor) => {
+  const handleSortingChange = (accessor: string) => {
     const sortOrder =
       accessor === sortField && order === "asc" ? "desc" : "asc";
     setSortField(accessor);
@@ -23,13 +31,23 @@ const TableHead = ({ columns, handleSorting }) => {
               : "default"
             : "";
           return (
+            sortable ? (
             <th
             key={accessor}
-            onClick={sortable ? () => handleSortingChange(accessor) : null}
+            onClick={() => handleSortingChange(accessor)}
               className={cl}
             >
               {label}
             </th>
+            ) : (
+              <th
+              key={accessor}
+                className={cl}
+              >
+                {label}
+              </th>
+            )
+
           );
         })}
       </tr>

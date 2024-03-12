@@ -1,14 +1,30 @@
-import { useState, useMemo } from "react";
+import React, { useState } from "react";
 import TableBody from "./TableBody";
 import TableHead from "./TableHead";
 import { useSortableTable } from "../useSortableTable";
+import { Data } from "../types/data.type";
+import { Column } from "../types/column.type";
 
-const Table = ({ caption, data, columns }: any) => {
-  
+interface TableProps {
+  caption: string;
+  data: Data[];
+  columns: Column[];
+}
+
+const Table: React.FC<TableProps> = ({
+  caption,
+  data,
+  columns,
+}: TableProps) => {
   const itemsPerPage = 10;
   const [page, setPage] = useState(1);
 
-  const [tableData, handleSorting] = useSortableTable(data, columns, itemsPerPage, page);
+  const [tableData, handleSorting]: any[] = useSortableTable(
+    data,
+    columns,
+    itemsPerPage,
+    page
+  );
 
   return (
     <>
