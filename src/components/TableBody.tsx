@@ -1,20 +1,57 @@
+import { useState } from "react";
+import { Modal } from "./Modal";
+
 const TableBody = ({ tableData, columns }: any) => {
+  const [modal, setModal]: any = useState(false);
+  const [user, setUser]: any = useState({})
+
+  const handleClick = (id: string) => {
+    const res = tableData.filter((item: any) => item._id === id);
+    setModal( true );
+    setUser(res[0]);
+  };
+
+  const hideModal = () => {
+    setModal(false);
+  };
+
   return (
     <>
       <tbody>
         {tableData.map((data: any) => {
           return (
-            <tr key={data.id}>
+            <tr key={data._id}>
               {columns.map(({ accessor }: any) => {
                 const tData = data[accessor]
                   ? data[accessor].toString()
                   : "false";
-                return <td key={accessor}>{tData}</td>;
+                return (
+                  <td key={accessor} onClick={() => handleClick(data._id)}>
+                    {tData}
+                  </td>
+                );
               })}
             </tr>
           );
         })}
       </tbody>
+      <Modal show={modal} handleClose={hideModal}>
+        <p>id: {user?._id}</p>
+        <p>Name: {user?.name}</p>
+        <p>DOB: {user?.dob}</p>
+        <p>Address:</p>
+        <p>Street: {user?.address?.street}</p>
+        <p>Town: {user?.address?.town}</p>
+        <p>Postcode: {user?.address?.postcode}</p>
+        <p>Telephone: {user.telephone}</p>
+        <p>Pets: {user?.pets}</p>
+        <p>Score: {user?.score}</p>	
+        <p>Email: {user?.email}</p>	
+        <p>URL: {user?.url}</p>	
+        <p>Description: {user?.description}</p>	
+        <p>Verified: {user?.verified ? "true" : "false"}</p>	
+        <p>Salary: {user?.salary}</p>	
+      </Modal>
     </>
   );
 };
