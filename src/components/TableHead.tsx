@@ -3,7 +3,7 @@ import { Column } from "../types/column.type";
 
 interface TableHeadProps {
   columns: Column[];
-  handleSorting: ((sortField: any, sortOrder: any) => void)
+  handleSorting: ((sortField: any, sortOrder: string) => void)
 }
 
 

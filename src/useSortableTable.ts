@@ -1,6 +1,8 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { Data } from "./types/data.type";
+import { Column } from "./types/column.type";
 
-function getDefaultSorting(defaultTableData: any, columns: any) {
+function getDefaultSorting(defaultTableData: any, columns: Column[]) {
   const sorted = [...defaultTableData].sort((a, b) => {
     const filterColumn = columns.filter((column: any) => column.sortbyOrder);
 
@@ -25,7 +27,7 @@ function getDefaultSorting(defaultTableData: any, columns: any) {
   return sorted;
 }
 
-export const useSortableTable = (data: any, columns: any, itemsPerPage: number, page: number) => {
+export const useSortableTable = (data: Data[], columns: Column[], itemsPerPage: number, page: number) => {
   
   const [tableData, setTableData] = useState(getDefaultSorting(data, columns));  
   const start = (page - 1) * itemsPerPage;

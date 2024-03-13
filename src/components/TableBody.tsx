@@ -4,7 +4,6 @@ import { Data } from "../types/data.type";
 import { Column } from "../types/column.type";
 
 interface TableBodyProps {
-  // couldn't find a correct data type for this prop
   tableData: Data[] | ((sortField: any, sortOrder: any) => Data[]) | any;
   columns: Column[];
 }
